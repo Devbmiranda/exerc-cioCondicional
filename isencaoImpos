@@ -1,0 +1,60 @@
+salario = 1000; // Substitua pelo salário desejado
+const numeroFilhos = 2; // Número de filhos menores de 14 anos
+
+// Alíquotas para as contribuições
+const aliquotas = {
+    senac: 0.01, // 1% sobre a folha de pagamento mensal
+    sesc: 0.015, // 1,5% sobre a folha de pagamento de empregados avulsos
+    senai: 0.01, // 1% sobre o valor total das remunerações de empregados do nicho industrial
+    sesi: 0.015, // 1,5% sobre a folha de pagamento mensal de empregados e avulsos
+    sebrae: 0.003, // 0,3% sobre o total de remunerações pagas aos empregados mensalmente
+    incra: 0.025, // 2,5% sobre a folha de pagamento mensal
+    incraAdicional: 0.002, // 0,2% sobre o total da remuneração
+    inss: 0.019, // 1,9% sobre o valor da folha de pagamento
+    salarioFamilia1: 44.09, // Valor do Salário Família para remuneração até R$ 859,89
+    salarioFamilia2: 31.07, // Valor do Salário Família para remuneração entre R$ 859,89 a R$ 1.292,43
+};
+
+// Cálculo das contribuições
+const contribuicaoSenac = salario * aliquotas.senac;
+const contribuicaoSesc = salario * aliquotas.sesc;
+const contribuicaoSenai = salario * aliquotas.senai;
+const contribuicaoSesi = salario * aliquotas.sesi;
+const contribuicaoSebrae = salario * aliquotas.sebrae;
+const contribuicaoIncra = salario * aliquotas.incra;
+const contribuicaoIncraAdicional = salario * aliquotas.incraAdicional;
+const contribuicaoINSS = salario * aliquotas.inss;
+
+// Cálculo do Salário Família
+let contribuicaoSalarioFamilia;
+if (salario <= 859.89) {
+    contribuicaoSalarioFamilia = numeroFilhos * aliquotas.salarioFamilia1;
+} else if (salario <= 1292.43) {
+    contribuicaoSalarioFamilia = numeroFilhos * aliquotas.salarioFamilia2;
+} else {
+    contribuicaoSalarioFamilia = 0;
+}
+
+// Somatória total de impostos descontados
+const totalImpostos = (
+    contribuicaoSenac + contribuicaoSesc + contribuicaoSenai +
+    contribuicaoSesi + contribuicaoSebrae + contribuicaoIncra +
+    contribuicaoIncraAdicional + contribuicaoINSS + contribuicaoSalarioFamilia
+);
+
+// Cálculo do salário líquido após os descontos
+const salarioLiquido = salario - totalImpostos;
+
+console.log(`Salário Bruto: R$ ${salario.toFixed(2)}`);
+console.log(`Impostos Descontados:`);
+console.log(`  - SENAC: R$ ${contribuicaoSenac.toFixed(2)}`);
+console.log(`  - SESC: R$ ${contribuicaoSesc.toFixed(2)}`);
+console.log(`  - SENAI: R$ ${contribuicaoSenai.toFixed(2)}`);
+console.log(`  - SESI: R$ ${contribuicaoSesi.toFixed(2)}`);
+console.log(`  - SEBRAE: R$ ${contribuicaoSebrae.toFixed(2)}`);
+console.log(`  - INCRA: R$ ${contribuicaoIncra.toFixed(2)}`);
+console.log(`  - INCRA Adicional: R$ ${contribuicaoIncraAdicional.toFixed(2)}`);
+console.log(`  - INSS: R$ ${contribuicaoINSS.toFixed(2)}`);
+console.log(`  - Salário Família: R$ ${contribuicaoSalarioFamilia.toFixed(2)}`);
+console.log(`Total de Impostos Descontados: R$ ${totalImpostos.toFixed(2)}`);
+console.log(`Salário Líquido: R$ ${salarioLiquido.toFixed(2)}`);
